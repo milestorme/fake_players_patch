@@ -172,19 +172,6 @@ index 4ccf53513..71609ccb8 100644
      // level 0 chat
      LANG_SYSTEMMESSAGE                  = 3,
      LANG_EVENTMESSAGE                   = 4,
-diff --git a/src/server/game/Server/WorldSession.cpp b/src/server/game/Server/WorldSession.cpp
-index 718e9627a..cfd3fc60f 100644
---- a/src/server/game/Server/WorldSession.cpp
-+++ b/src/server/game/Server/WorldSession.cpp
-@@ -495,6 +495,8 @@ void WorldSession::LogoutPlayer(bool Save)
- // Kick a player out of the World
- void WorldSession::KickPlayer()
- {
-+    _player->SaveToDB(); // Save character information
-+    _player->SaveInventoryAndGoldToDB(); // Save Inventory & gold
-     if (m_Socket && !m_Socket->IsClosed())
-         m_Socket->CloseSocket();
- }
 diff --git a/src/server/game/World/World.cpp b/src/server/game/World/World.cpp
 index d826383e2..2175840ff 100644
 --- a/src/server/game/World/World.cpp
